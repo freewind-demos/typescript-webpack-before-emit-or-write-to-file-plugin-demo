@@ -1,8 +1,7 @@
-TypeScript Webpack After Emit Plugin Demo
-==========================================
+TypeScript Webpack Before Emitting (or Write to File) Plugin Demo
+=================================================================
 
-如何写一个webpack的plugin，可以对最终生成的写入文件的代码进行最后检查
-（比如是否包括了某些invalid chars等）
+在webpack把生成的代码写入文件之前，对代码进行修改。
 
 ```
 npm install

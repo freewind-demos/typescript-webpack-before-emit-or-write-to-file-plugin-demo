@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "demo": "webpack -r ts-node/register"
+    "demo": "webpack -r ts-node/register && open dist/index.html"
   },
   "dependencies": {
     "css-loader": "2.1.1",

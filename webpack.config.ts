@@ -1,6 +1,6 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import WebpackAfterEmitPlugin from './src/webpack-after-emit-plugin';
+import WebpackModifyBeforeEmittingPlugin from './src/webpack-modify-before-emiting-plugin';
 
 module.exports = {
   mode: 'development',
@@ -13,16 +13,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "index.html",
     }),
-    new WebpackAfterEmitPlugin({
+    new WebpackModifyBeforeEmittingPlugin({
       enable: true,
-      checkFn: (assetSources) => {
+      modifyFn: (assetSources) => {
         for (const assetName in assetSources) {
           const content = assetSources[assetName];
-          const abondonKeyword = 'console';
-          if (content.includes(abondonKeyword)) {
-            throw new Error(`should not contain '${abondonKeyword}' in content of '${assetName}'`)
-          }
+          assetSources[assetName] = content.replace('---placeholder---', '(modified in webpack plugin)');
         }
+        return assetSources;
       }
     })
   ]

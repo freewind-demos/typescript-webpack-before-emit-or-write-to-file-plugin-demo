@@ -1,1 +1,1 @@
-document.write('This HTML page is auto generated')
+document.write('Hello, ---placeholder---')
