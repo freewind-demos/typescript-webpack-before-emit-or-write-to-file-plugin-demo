@@ -1,7 +1,7 @@
 import {Compiler, compilation} from 'webpack';
 import * as webpack from "webpack";
 
-const ThisPluginName = 'WebpackModifyFinalHtmlPlugin';
+const ThisPluginName = 'WebpackAfterEmitPlugin';
 
 type AssetSources = { [assetName: string]: string };
 type CheckEmittedSourcesFn = (assetSources: AssetSources) => void
