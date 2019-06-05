@@ -4,11 +4,11 @@ import * as webpack from "webpack";
 const ThisPluginName = 'WebpackModifyFinalHtmlPlugin';
 
 type AssetSources = { [assetName: string]: string };
-type ModifyFn = (html: string, assetSources: AssetSources) => string
+type CheckEmittedSourcesFn = (assetSources: AssetSources) => void
 
 type Options = {
   enable: boolean,
-  modify: ModifyFn
+  checkFn: CheckEmittedSourcesFn
 }
 
 function getAssetSources(compilation: webpack.compilation.Compilation): AssetSources {
@@ -21,24 +21,22 @@ function getAssetSources(compilation: webpack.compilation.Compilation): AssetSou
   return assetSources;
 }
 
-export default class WebpackModifyFinalHtmlPlugin {
+export default class WebpackAfterEmitPlugin {
   private readonly enable: boolean;
-  private readonly modify: ModifyFn;
+  private readonly checkFn: CheckEmittedSourcesFn;
 
   constructor(options: Options) {
     this.enable = options.enable;
-    this.modify = options.modify;
+    this.checkFn = options.checkFn;
   }
 
   apply(compiler: Compiler) {
     if (!this.enable) {
       return;
     }
-    compiler.hooks.compilation.tap(ThisPluginName, (compilation: compilation.Compilation) => {
-      (compilation.hooks as any)['htmlWebpackPluginAfterHtmlProcessing'].tap(ThisPluginName, (pluginArgs: any) => {
-        const assetSources = getAssetSources(compilation);
-        pluginArgs.html = this.modify(pluginArgs.html, assetSources);
-      });
+    compiler.hooks.afterEmit.tap(ThisPluginName, (compilation: compilation.Compilation) => {
+      const assetSources = getAssetSources(compilation);
+      this.checkFn(assetSources)
     });
   }
 

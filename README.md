@@ -1,16 +1,13 @@
-TypeScript Webpack Modify Final Html Code Plugin Demo
-=====================================================
+TypeScript Webpack After Emit Plugin Demo
+==========================================
 
-如何写一个webpack的plugin，可以对最终生成的html内的代码进行修改。
-
-注：WebpackModifyFinalHtmlPlugin依赖于HtmlWebpackPlugin
+如何写一个webpack的plugin，可以对最终生成的写入文件的代码进行最后检查
+（比如是否包括了某些invalid chars等）
 
 ```
 npm install
 npm run demo
 ```
-
-然后看`dist`目录下生成的`index.html`文件。
 
 Resources
 ---------
