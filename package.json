@@ -1,14 +1,14 @@
 {
   "scripts": {
-    "demo": "webpack -r ts-node/register && open dist/bundle.js"
+    "demo": "webpack && open ./dist/bundle.js"
   },
   "dependencies": {
   },
   "devDependencies": {
-    "webpack": "4.29.1",
-    "@types/webpack": "4.4.24",
-    "ts-node": "8.0.3",
-    "typescript": "3.3.4000",
-    "webpack-cli": "3.3.0"
+    "webpack": "5.89.0",
+    "@types/webpack": "5.28.5",
+    "ts-node": "10.9.1",
+    "typescript": "5.2.2",
+    "webpack-cli": "5.1.4"
   }
 }

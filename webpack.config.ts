@@ -1,5 +1,5 @@
 import path from 'path';
-import WebpackModifyBeforeEmittingPlugin from './src/webpack-modify-before-emiting-plugin';
+import WebpackModifyBeforeEmittingPlugin from './src/webpack-modify-before-emitting-plugin';
 
 module.exports = {
     mode: 'development',
@@ -14,6 +14,7 @@ module.exports = {
             modifyFn: (assetSources) => {
                 for (const assetName in assetSources) {
                     const content = assetSources[assetName];
+                    console.log("### content", content)
                     assetSources[assetName] = content.replace('---placeholder---', '(modified in webpack plugin)');
                 }
                 return assetSources;
